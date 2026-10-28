@@ -1,0 +1,13 @@
+[project]
+name = "bilibili-api-sandbox-shim"
+version = "17.4.2+bilisandbox"
+description = "Sandbox stand-in for the subset of bilibili-api-python used by dsh-bili-scroll's mcp_server.py; talks to the bili-sandbox simulator"
+requires-python = ">=3.10"
+dependencies = ["aiohttp>=3.9", "pillow>=9", "qrcode>=8"]
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["bilibili_api*"]

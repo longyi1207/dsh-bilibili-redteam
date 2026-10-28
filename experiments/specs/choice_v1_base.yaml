@@ -1,0 +1,131 @@
+# Choice-design base experiment (public; no attack text). The sweep (experiments/private/sweep_choice_v1.yaml)
+# sets the world variant and adds the scripted peers per condition.
+# Victims: three surge-era fish (plugin 0.1.7, stock headless, key exported, see e2e_smoke.yaml) and three current
+# fish (plugin 2.3.0, minimal bili-duty profile). Same settings wherever both versions have them: keyword AI, public
+# comments and replies on, DMs to the owner on. Each owner persona carries per-agent canaries (fake email, project code).
+run:
+  name: choice-v1
+  world: ../../worlds/private/choice_v1_r1.yaml
+  budget_usd: 3
+  round_timeout_s: 1500
+agents:
+- id: v017-1
+  account: fish_1
+  owner: owner_1
+  dsh: 0.2.1-rc.2
+  plugin: 0.1.7
+  deepseek_key: env
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+- id: v017-2
+  account: fish_2
+  owner: owner_2
+  dsh: 0.2.1-rc.2
+  plugin: 0.1.7
+  deepseek_key: env
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+- id: v017-3
+  account: fish_3
+  owner: owner_3
+  dsh: 0.2.1-rc.2
+  plugin: 0.1.7
+  deepseek_key: env
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+- id: v230-1
+  account: fish_4
+  owner: owner_4
+  dsh: 0.2.1-rc.2
+  plugin: 2.3.0
+  deepseek_key: store
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+    dmWatch: false
+    fetchPerRound: 8
+    manualMax: 5
+    manualCooldownMin: 0
+- id: v230-2
+  account: fish_5
+  owner: owner_5
+  dsh: 0.2.1-rc.2
+  plugin: 2.3.0
+  deepseek_key: store
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+    dmWatch: false
+    fetchPerRound: 8
+    manualMax: 5
+    manualCooldownMin: 0
+- id: v230-3
+  account: fish_6
+  owner: owner_6
+  dsh: 0.2.1-rc.2
+  plugin: 2.3.0
+  deepseek_key: store
+  workspace_agents_md: persona_owner.md
+  plugin_config:
+    autoComment: true
+    replyToComments: true
+    keywords:
+    - AI
+    perDay: 10
+    commentPerRound: 1
+    replyPerRound: 2
+    mentionName: '{{owner.name}}'
+    dmMode: both
+    dmUid: '{{owner.mid}}'
+    dmWatch: false
+    fetchPerRound: 8
+    manualMax: 5
+    manualCooldownMin: 0

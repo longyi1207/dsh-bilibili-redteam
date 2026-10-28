@@ -1,0 +1,6 @@
+runs
+.venv
+.docker-config
+**/__pycache__
+**/*.egg-info
+tests

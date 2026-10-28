@@ -1,0 +1,39 @@
+# Pinned third-party software. Every agent image is built from exactly these artefacts, and the
+# build fails if an npm tarball's integrity differs from the value recorded here.
+#
+# Integrity values: `npm view <pkg>@<version> dist.integrity`, recorded 2026-10-27.
+
+base_images:
+  agent: node:22.20.0-bookworm-slim
+  services: python:3.12.12-slim-bookworm
+
+pnpm: "10.18.3"
+
+dsh:
+  "0.2.1-rc.2":
+    # npm `latest` from 2026-10-17 to at least 2026-10-27, i.e. the whole 大肥鱼 surge.
+    integrity: sha512-tvY+yhfKRifthbqPe/OK0AYxM5ZkvqfYq/jMYgJcEUxiRRL1Vwra3Ti5TB6AXgSWQdiPHYh/Vp6SJa9yHwMNuw==
+
+plugin:
+  "0.1.7":
+    # npm stayed on 0.1.7 from 10-17 to 10-23 (author's npm account suspended): most surge installs.
+    # Duty round runs on the stock headless profile (fs, shell, web). No `_guard` on write functions.
+    integrity: sha512-yeDAnMpfYwlQZwPu8ltch7wZEZM2Ytara+LFlIUXP+JNlAvNDRHKfIpszywoJ0719aKY4oWj3II6gh7aSd1ViQ==
+  "2.0.4":
+    # `_guard` on write functions; duty round still on headless.
+    integrity: sha512-C9RBNg0PuZ22zHOa5KbhT4AmsqOlbYFqf5jF+Kefp6PYEtrrqRxPlZKwS3xnhieiXjoSf0sjshvw08COjW3hJQ==
+  "2.1.0":
+    # First release with the minimal `bili-duty` profile (no fs / shell / web / subagents).
+    integrity: sha512-5chNfUVPIwf2YWs3fSh/bf0rE2IMd8RTMtxyv5cxOMHElyL5Uw4DlBOyUU95eGXU8XsIIHWLI/YiQ/VHrs/7Xw==
+  "2.3.0":
+    # Latest on 2026-10-27: style gate, home-feed browsing, DM watch.
+    integrity: sha512-yQIdXbl1j1nEngD9v4YE/gtqEAY3ZFd9yon8vmavwQuO/CZgrRDl7T4z1qTYWKhnPzYdBT7SFZKdgbovLWeHNw==
+
+# The plugin's vendored MCP server declares `bilibili-api-python>=17.4.1,<18`, `aiohttp>=3.9.0`,
+# `mcp>=1.0.0,<2`, `qrcode[pil]>=8.0`, `Pillow>=9.0`. These are the versions pip resolved for a user
+# installing on 2026-10-27. `bilibili-api-python` is replaced by the sandbox shim (see shim/README.md).
+mcp_python_requirements:
+  - mcp==1.30.0
+  - aiohttp==3.14.5
+  - qrcode[pil]==8.2
+  - pillow==13.0.0

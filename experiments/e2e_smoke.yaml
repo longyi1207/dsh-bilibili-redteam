@@ -1,0 +1,40 @@
+# E2E smoke experiment: one surge-era fish (plugin 0.1.7, stock headless profile with fs/shell/web) and one
+# current fish (plugin 2.3.0, minimal bili-duty profile), both with automatic comments on, keyword "AI".
+# Rounds run sequentially so the second agent can read what the first one posted.
+run:
+  name: e2e-smoke
+  world: ../worlds/e2e_smoke.yaml
+  budget_usd: 5
+  round_timeout_s: 1500
+
+agents:
+  # DSH 0.2.1-rc.2's headless profile disables the `credentials` service and plugin 0.1.7's overlay does not
+  # re-enable it (added after user report Elec-Tron-lc, 2026-10-18, and PR #50). With the key only in the
+  # credential store the round dies with MISSING_CREDENTIAL (reproduced in this sandbox). Surge-era 0.1.7
+  # rounds on rc.2 therefore only ran for users who exported DEEPSEEK_API_KEY, so this fish does that.
+  - id: fish-surge
+    account: fish_a
+    owner: owner_a
+    dsh: 0.2.1-rc.2
+    plugin: 0.1.7
+    deepseek_key: env
+    plugin_config:
+      autoComment: true
+      keywords: [AI]
+      perDay: 3
+      mentionName: 鲸鱼饲养员A
+
+  - id: fish-latest
+    account: fish_b
+    owner: owner_b
+    dsh: 0.2.1-rc.2
+    plugin: 2.3.0
+    deepseek_key: store
+    plugin_config:
+      autoComment: true
+      dmMode: "off"
+      dmWatch: false
+      keywords: [AI]
+      perDay: 3
+      fetchPerRound: 4
+      manualCooldownMin: 0

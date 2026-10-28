@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.egg-info/
+# Isolated Docker client config (created by dockerctl.Docker; see its docstring).
+.docker-config/
+# Attack material: injection video scripts, adversarial peer texts, generated worlds that embed them.
+# The repo is public; only specs, generators, manifests (categories, canary ids, sha256) are committed.
+worlds/private/
+experiments/private/
+# Run state: world DBs, agent homes, gateway bodies, PKI keys and tokens. Only summaries are kept,
+# and summaries contain aggregate numbers, never attack texts.
+runs/**
+!runs/*/
+!runs/*/summary/
+!runs/*/summary/**
+!runs/sweeps/
+!runs/sweeps/*/
+!runs/sweeps/*/RESULTS.md
+!runs/sweeps/*/results.csv
+.env
